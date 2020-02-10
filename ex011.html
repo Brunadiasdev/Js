@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Verificador de idade</title>
+    <style>
+    body{
+      background-color: rgb(0, 187, 255);
+      font: 15pt Arial;
+    }
+    header{
+        color: white;
+        text-align: center;
+      
+    }
+    section{
+     background-color: beige;
+     border-radius: 10px;
+     padding: 15px;
+     width: 500px;
+     margin: auto;
+     box-shadow: 3px 3px 10px rgb(48, 46, 46);
+    }
+    footer{
+        color: white;
+        text-align: center;
+        font-style: italic;
+    }
+    div{
+       
+        padding: 5px;
+    }
+   img{
+       width:300px ;
+       height:200px ;
+       
+   }
+    </style>
+</head>
+<body onload="verificar()"> 
+    <header>
+        <h1>verificador de idade</h1>
+    </header>
+
+   <section>
+    <div>
+        <p>Ano de nascimento:
+        <input type="number" name="txtano" id="txtano">
+        </p>
+        <p>sexo:
+            <input type="radio" name="radsex" id="mas" checked>
+            <label for="mas">Masculino</label>
+            <input type="radio" name="radsex" id="fen">
+            <label for="fen">Feminino</label>
+        </p>
+        <p>
+            <input type="button" value="verificar" onclick="verificar()">
+        </p>
+    </div>
+    <div id="res" >
+        Preencha os dados acima para ver o resultado! 
+    </div>
+  </section> 
+
+    <footer>
+          <p>&copy;Exercicio</p>
+    </footer>
+
+    <script>
+  function verificar(){
+    var data = new Date()
+    var ano = data.getFullYear()
+    var fano = document.getElementById('txtano')
+    var res = document.getElementById ('res')
+  if (fano.value.length == 0 || Number (fano.value) > ano)
+  {
+    window.alert('[ERRO] Verifique os dados e tente novamente!')
+  }
+
+  else 
+  {
+     var fsex = document.getElementsByName('radsex')
+     var idade = ano - Number(fano.value)
+     var genero = ''
+     var img = document.createElement('img')
+     img.setAttribute('id', 'foto')
+     if(fsex[0].checked){
+         genero = "Homem"
+      if (idade >=0 && idade < 10){
+          //criança
+          img.setAttribute('src','criana-menino.jpg')
+      }
+      else if (idade < 21){
+          //jovem
+          img.setAttribute('src','jovem-homem.jpg')
+      }
+      else if (idade < 50){
+          //adulto
+          img.setAttribute('src','adulto-homem.jpg')
+      }
+      else{
+         //idoso
+         img.setAttribute('src','idoso-homem.jpg')
+      }
+
+     }
+     else if (fsex[1].checked){
+         genero = "Mulher"
+         if (idade >=0 && idade < 10){
+          //criança
+          img.setAttribute('src','crianca-mulher.jpg')
+      }
+      else if (idade < 21){
+          //jovem
+          img.setAttribute('src','jove-mulher.jpg')
+      }
+      else if (idade < 50){
+          //adulto
+          img.setAttribute('src','adulto-mulher.jpg')
+      }
+      else{
+         //idoso
+         img.setAttribute('src','idosa-mulher.jpg')
+      }
+     }
+     res.style.textAlign = 'center'
+     res.innerHTML = `você é ${genero} e você tem ${idade} anos `
+     res.appendChild(img)
+     
+  }
+  }
+
+    </script>
+</body>
+</html>
